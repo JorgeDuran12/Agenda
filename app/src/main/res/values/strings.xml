@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Agenda </string>
+    <string name="crear_nuevo_contacto">Crear Nuevo Contacto</string>
+    <string name="ingrese_nombre">Nombre</string>
+    <string name="ingrese_numero">Numero telefonico</string>
+    <string name="ingrese_correo_electronico">Correo electronico</string>
+    <string name="nuevo_registro">Nuevo Registro</string>
+</resources>
