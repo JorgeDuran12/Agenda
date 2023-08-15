@@ -1,5 +1,7 @@
 package com.example.agendavacia.adaptadores;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.agendavacia.R;
+import com.example.agendavacia.VerActivity;
 import com.example.agendavacia.entidades.Contactos;
 
 import java.util.ArrayList;
@@ -49,6 +52,17 @@ public class ListaContactoAdapter extends RecyclerView.Adapter<ListaContactoAdap
             viewNombre = itemView.findViewById(R.id.viewNombre);
             viewTelefono = itemView.findViewById(R.id.viewTelefono);
             viewCorreo = itemView.findViewById(R.id.viewCorreo);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Context context = viewNombre.getContext();
+                    Intent intent = new Intent(context, VerActivity.class);
+                    intent.putExtra("ID", listaContacto.get(getAdapterPosition()).getId());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
