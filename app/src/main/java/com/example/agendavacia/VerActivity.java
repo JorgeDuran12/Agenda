@@ -1,10 +1,14 @@
 package com.example.agendavacia;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +23,7 @@ public class VerActivity extends AppCompatActivity {
     Contactos contacto;
     int id = 0;
 
-    FloatingActionButton fabEditar;
+    FloatingActionButton fabEditar, fabEliminar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,14 @@ public class VerActivity extends AppCompatActivity {
         txtCorreo = findViewById(R.id.ver_email);
         btnGuardar = findViewById(R.id.ver_btn_guardar);
         fabEditar = findViewById(R.id.fabeditar);
+        fabEliminar = findViewById(R.id.fabeliminar);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Establecer el ícono de navegación y agregar un listener
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.volver_flecha__1_);
 
         fabEditar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +76,49 @@ public class VerActivity extends AppCompatActivity {
             txtTelefono.setInputType(InputType.TYPE_NULL);
             txtCorreo.setInputType(InputType.TYPE_NULL);
 
+
+            fabEliminar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder  builder = new AlertDialog.Builder(VerActivity.this);
+                    builder.setMessage("¿Desea eliminar este contacto?")
+                            .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    if (dbContactos.eliminarContacto(id)){
+                                            lista();
+                                    }
+                                }
+                            })
+                            .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            }).show();
+                }
+            });
         }
 
     }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    private void lista(){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+
 }

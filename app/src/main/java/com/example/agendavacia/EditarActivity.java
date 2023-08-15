@@ -2,12 +2,15 @@ package com.example.agendavacia;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.agendavacia.db.DbContactos;
 import com.example.agendavacia.entidades.Contactos;
@@ -17,6 +20,7 @@ public class EditarActivity extends AppCompatActivity {
     EditText txtNombre,txtTelefono,txtCorreo;
     Button btnGuardar;
     Contactos contacto;
+    FloatingActionButton fabEditar, fabEliminar;
 
     int id = 0;
 
@@ -30,6 +34,18 @@ public class EditarActivity extends AppCompatActivity {
         txtCorreo = findViewById(R.id.ver_email);
         btnGuardar = findViewById(R.id.ver_btn_guardar);
 
+        fabEditar = findViewById(R.id.fabeditar);
+        fabEditar.setVisibility(View.INVISIBLE);
+
+        fabEliminar = findViewById(R.id.fabeliminar);
+        fabEliminar.setVisibility(View.INVISIBLE);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Establecer el ícono de navegación y agregar un listener
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.volver_flecha__1_);
 
         if(savedInstanceState == null ){
             Bundle extras = getIntent().getExtras();
@@ -72,10 +88,24 @@ public class EditarActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    private void VerRegistro() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
-    private void VerRegistro(){
-        Intent i = new Intent(this,VerActivity.class);
-        startActivity(i);
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
+
+
+
 }
