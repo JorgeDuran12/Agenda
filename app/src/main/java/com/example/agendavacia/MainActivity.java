@@ -19,12 +19,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-        Toolbar toolbar;
+    Toolbar toolbar;
+    RecyclerView listaContactos;
 
-        RecyclerView listaContactos;
-
-      ArrayList<Contactos> listarArrayContactos;
-    private int REQUEST_CODE;
+  ArrayList<Contactos> listarArrayContactos;
+private int REQUEST_CODE;
 
 
     @Override
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-         listaContactos = findViewById(R.id.ListaContactos);
+        listaContactos = findViewById(R.id.ListaContactos);
         listaContactos.setLayoutManager(new LinearLayoutManager(this));
         DbContactos dbContactos = new DbContactos(MainActivity.this);
 
