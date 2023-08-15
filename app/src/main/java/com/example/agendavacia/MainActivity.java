@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView listaContactos;
 
       ArrayList<Contactos> listarArrayContactos;
+    private int REQUEST_CODE;
 
 
     @Override
@@ -65,4 +66,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NuevoActivity.class);
         startActivity(intent);
     }
+
+    protected void onResume() {
+        super.onResume();
+    }
+
 }

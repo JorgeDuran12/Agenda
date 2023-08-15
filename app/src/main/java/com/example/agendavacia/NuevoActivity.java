@@ -3,6 +3,7 @@ package com.example.agendavacia;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,10 +51,13 @@ public class NuevoActivity extends AppCompatActivity {
         });
     }
 
+
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            // Procedimiento de redireccionamiento aquí, por ejemplo:
-            onBackPressed();
+
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -65,5 +69,11 @@ public class NuevoActivity extends AppCompatActivity {
         txtTelefono.setText("");
     }
 
+
+    private void VerRegistro() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
 }
